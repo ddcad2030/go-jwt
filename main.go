@@ -1,9 +1,20 @@
 package main
 
 import (
-	"fmt"
+	"david/go-jwt/controllers"
+	"david/go-jwt/initial"
+
+	"github.com/gin-gonic/gin"
 )
 
+func init() {
+	initial.LoadEnv()
+	initial.ConnectDB()
+	initial.SyncDatabase()
+}
 func main() {
-	fmt.Println("david")
+	r := gin.Default()
+
+	r.POST("/signup", controllers.SignUp)
+	r.Run()
 }
